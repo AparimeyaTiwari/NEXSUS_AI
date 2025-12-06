@@ -1,28 +1,48 @@
 # Python cache files
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
+*$py.class
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
 # Environment files
 .env
+*.env
 
-# Virtual environment folders
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# MacOS files
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Python virtual environments
 venv/
 env/
 .venv/
 
-# Python packaging
-*.egg-info/
-dist/
-build/
+# Sensitive files (API keys, secrets, etc.)
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
 
-# OS files
-.DS_Store
-Thumbs.db
+# Output files
+*.out
+*.csv
+*.tsv
+*.xlsx
+*.pdf
 
-# Logs
-*.log
+# GitHub Actions / CI artifacts
+*.yml
+*.yaml
