@@ -1,8 +1,24 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Python cache
-__pycache__/
+# Environment files
+.env
+
+# Virtual environment folders
+venv/
+env/
+.venv/
+
+# Python packaging
+*.egg-info/
+dist/
+build/
 
 # OS files
 .DS_Store
@@ -10,10 +26,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Virtual environments
-venv/
-env/
-
-# Others
-*.pyc
