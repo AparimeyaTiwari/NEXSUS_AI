@@ -30,6 +30,3 @@ def run_extrainfo(name: str, extra_info: dict, web_results: list):
         "score": score,
         "report": report
     }
-
-
-#test
