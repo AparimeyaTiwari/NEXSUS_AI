@@ -164,4 +164,20 @@ The platform follows a **sequential, deterministic agent-based workflow**, orche
 
 **Prototype / Proof of Concept**
 
-Developed for **EY Techathon 6.0**, wi
+Developed for **EY Techathon 6.0**, with core logic implemented in notebooks and workflow validated through architecture and flow diagrams.
+
+---
+
+## 👨‍💻 Team
+
+**Team Name:** NEXSUS AI  
+
+- **Aparimeya Tiwari** – Database & Confidence Scoring (XGBoost)  
+- **Harshalee Malu** – Provider Ingestion & Directory Management  
+- **Sahil Adit** – Data Validation, Enrichment & Orchestration  
+
+---
+
+## 📄 License
+
+License to be added.
