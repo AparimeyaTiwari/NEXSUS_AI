@@ -1,239 +1,167 @@
-NEXSUS AI
+# NEXSUS AI  
+### Agent-Based Provider Data Validation & Confidence Scoring Platform  
 
-Agent-Based Provider Data Validation & Confidence Scoring Platform
+**EY Techathon 6.0 – Detailed Solution Submission**
 
-EY Techathon 6.0 – Detailed Solution Submission 
+---
 
-692ab8680198f_EY_Techathon_6 (1)
+## 🚀 Overview
 
-Overview
+**NEXSUS AI** is an agent-based, workflow-driven platform built to solve a critical problem in the healthcare payer ecosystem: **inaccurate, outdated, and fragmented provider directory data**.
 
-NEXSUS AI is an agent-based, workflow-driven platform designed to solve one of the most persistent challenges in the healthcare payer ecosystem: inaccurate, outdated, and fragmented provider directory data.
+Insurance providers and third-party administrators (TPAs) depend on provider data for compliance, operations, and patient experience. However, manual and periodic verification methods fail to scale.  
+NEXSUS AI enables a **single, continuously validated source of truth** using confidence-based automation and human-in-the-loop governance.
 
-The solution targets insurance providers and third-party administrators (TPAs) who rely on accurate provider information for compliance, operations, and patient experience. By automating provider data validation and introducing confidence-based decisioning, NEXSUS AI enables a single, continuously verified source of truth for provider directories 
+---
 
-692ab8680198f_EY_Techathon_6 (1)
+## ❗ Problem Statement
 
-.
+Provider directories across major healthcare payers suffer from systemic data quality issues:
 
-Problem Statement
+- **40–80%** of provider contact data is inaccurate  
+- Manual verification achieves only **60–70% accuracy**  
+- Fully corrected data can take **117–280 days**  
+- Patients often visit providers who no longer accept their plan, causing delays and unexpected costs  
 
-Provider directories across major healthcare payers suffer from severe data quality issues:
+These challenges arise from **manual, fragmented, and non-scalable verification processes**, increasing compliance risk (e.g., *No Surprises Act*) and degrading patient trust.
 
-40–80% of provider contact data is inaccurate
+---
 
-Manual verification achieves only 60–70% accuracy
+## 👥 Target Users
 
-Fully corrected data can take 117–280 days
+### Primary Users
+- Payer Operations Teams  
+- Provider Relations Teams  
+- Compliance & Quality Assurance Teams  
 
-Patients frequently encounter providers who no longer accept their plan, causing delays and unexpected costs
+### Secondary Users
+- Healthcare Providers (for direct verification in low-confidence cases)
 
-These issues stem from manual, periodic verification processes that do not scale across multiple directories and data sources, leading to inconsistencies, compliance risk (e.g., No Surprises Act), and poor patient experience 
+---
 
-692ab8680198f_EY_Techathon_6 (1)
+## 💡 Solution Overview & Value Proposition
 
-.
+NEXSUS AI replaces slow, manual audits with **continuous, automated provider data validation**:
 
-Target Users
+- Establishes a **single source of truth** for provider directories  
+- Uses **agentic workflows** to mimic real-world human verification steps  
+- Automatically flags outdated or inconsistent records  
+- Explains *why* data was changed using **Explainable AI**  
+- Escalates only **high-risk records** to human review or provider outreach  
 
-Primary Users:
+This approach reduces operational overhead while improving **accuracy, consistency, and regulatory readiness**.
 
-Payer Operations Staff
+---
 
-Provider Relations Teams
+## ⚙️ Methodology & Approach
 
-Compliance and Quality Assurance Teams
+The platform follows a **sequential, deterministic agent-based workflow**, orchestrated using **LangGraph**.
 
-Secondary Users:
+### Workflow
 
-Healthcare providers (for direct verification in low-confidence cases)
+1. **Data Ingestion**  
+   - NPI and basic provider details submitted via user action or scheduler  
 
-Solution Overview & Value Proposition
+2. **Asynchronous Processing**  
+   - Tasks routed through **Celery + Redis**  
 
-NEXSUS AI replaces slow, manual audits with continuous, automated provider data validation:
+3. **AI Agent 1 – Data Validation**  
+   - Cross-verifies data against NPI registry and trusted web sources  
 
-Establishes a single source of truth for provider data
+4. **AI Agent 2 – Data Enrichment**  
+   - Fetches licenses, affiliations, and credentials  
 
-Uses agentic workflows to mimic real-world human verification steps
+5. **AI Agent 3 – Confidence Scoring**  
+   - Uses **XGBoost** to compute confidence score  
+   - **SHAP** provides explainability  
 
-Automatically flags incorrect or outdated records
+6. **Decision Routing**
+   - **≥ 88–90%** → Auto-approved and updated  
+   - **60–90%** → Acceptable, monitored  
+   - **< 60%** → Escalated to automated calling agent or human review  
 
-Explains why data was changed using explainable AI
+7. **Directory Update & Reporting**
+   - Canonical database updated  
+   - Audit logs and validation reports generated  
 
-Escalates only high-risk cases to human review or provider outreach
+---
 
-This approach significantly reduces operational effort while improving accuracy, consistency, and regulatory readiness 
+## 📊 Impact Metrics
 
-692ab8680198f_EY_Techathon_6 (1)
+### Data Accuracy
+- High-confidence provider records  
+- Reduced duplicate and inconsistent entries  
 
-.
+### Operational Efficiency
+- Time to validate 100 records  
+- Reduced manual verification workload  
 
-Methodology / Approach
+### Update Velocity
+- Faster provider onboarding  
+- Faster update propagation  
 
-The system follows a sequential, deterministic agent-based workflow, orchestrated using LangGraph:
+---
 
-Data Ingestion
+## 🧱 Technology Stack
 
-NPI + basic provider details submitted via user action or scheduler
+### Core
+- **Languages:** Python, SQL  
+- **Backend:** FastAPI  
+- **Database:** PostgreSQL (canonical provider database)  
+- **Agent Orchestration:** LangGraph  
+- **Async Processing:** Celery + Redis  
 
-Async Processing Queue
+### Machine Learning & AI
+- **Model:** XGBoost  
+- **Explainability:** SHAP  
 
-Tasks routed through Celery + Redis for scalable execution
+### Data Sources
+- Web scraping (trusted provider websites)  
+- External registries (NPI, state licensing sources)  
 
-AI Agent 1 – Data Validation
+### Infrastructure
+- Docker-based containerization  
+- Cloud-ready, horizontally scalable design  
 
-Validates provider details against NPI registry and trusted web sources
+---
 
-AI Agent 2 – Data Enrichment
+## 📌 Assumptions & Constraints
 
-Fetches additional attributes (licenses, affiliations, credentials)
+### Assumptions
+- Initial deployment limited to one state (e.g., Massachusetts)  
+- Provider data available via public registries or websites  
 
-AI Agent 3 – Confidence Scoring
+### Constraints
+- Variable data quality across directories  
+- Rate limits and compliance constraints  
+- Regulatory requirements for auditability  
 
-Uses XGBoost to compute a confidence score
+---
 
-SHAP provides explainability for decisions
+## 🔐 Security, Scalability & Governance
 
-Decision Routing
+- Confidence-based escalation ensures **human-in-the-loop control**  
+- Full audit logs for all data changes  
+- Secure access and encrypted storage  
+- Horizontally scalable via asynchronous workers  
+- Modular agents allow easy extension to:
+  - New states  
+  - New data sources  
+  - Additional agents (e.g., calling, retraining)
 
-≥ 88–90% confidence: Auto-approved and updated
+---
 
-60–90% confidence: Acceptable, monitored
+## 🧩 Components Demonstrated / Planned
 
-< 60% confidence: Escalated to automated calling agent or human review
+- XGBoost-based confidence scoring engine  
+- Explainable AI layer for decision transparency  
+- Automated calling agent for low-confidence records  
+- Geospatial confidence map for provider reliability  
 
-Directory Update & Reporting
+---
 
-Canonical database updated
+## 🚧 Project Status
 
-Audit logs and validation reports generated
+**Prototype / Proof of Concept**
 
-(Refer to architecture and flowchart diagrams on pages 7–8) 
-
-692ab8680198f_EY_Techathon_6 (1)
-
-.
-
-Impact Metrics
-
-The solution’s effectiveness is measured using:
-
-Data Accuracy
-
-High-confidence provider records
-
-Reduction in duplicate and inconsistent entries
-
-Operational Efficiency
-
-Time to validate 100 provider records
-
-Reduction in manual verification workload
-
-Update Velocity
-
-Faster onboarding of new providers
-
-Faster propagation of updates across systems
-
-Technology Stack
-Core Technologies
-
-Languages: Python, SQL
-
-Backend: FastAPI
-
-Database: PostgreSQL (canonical provider database)
-
-Agent Orchestration: LangGraph (workflow-based execution)
-
-Async Processing: Celery + Redis
-
-Machine Learning & AI
-
-Model: XGBoost (confidence scoring)
-
-Explainability: SHAP
-
-Data Sources
-
-Web scraping (trusted provider websites)
-
-External registries (NPI, state licensing sources)
-
-Infrastructure
-
-Containerized deployment using Docker
-
-Cloud-ready, horizontally scalable architecture
-
-Assumptions & Constraints
-Assumptions
-
-Initial deployment limited to one state (e.g., Massachusetts)
-
-Provider data is accessible via public registries or websites
-
-Constraints
-
-Inconsistent data quality across directories
-
-Rate limits and compliance constraints for scraping and outreach
-
-Regulatory requirements for auditability and transparency
-
-Security, Scalability & Governance
-
-Confidence-based escalation ensures human-in-the-loop control
-
-Full audit logs for all data changes
-
-Secure access and encrypted storage
-
-Horizontally scalable using asynchronous workers
-
-Modular agent design allows easy extension to:
-
-New states
-
-New data sources
-
-Additional agents (e.g., calling, retraining)
-
-Components Demonstrated / Planned
-
-XGBoost-based confidence scoring engine
-
-Explainable AI layer showing reasoning behind updates
-
-Automated calling agent for low-confidence records
-
-Geospatial confidence map visualizing provider reliability
-
-Project Status
-
-🚧 Prototype / Proof of Concept
-
-This repository represents an early-stage implementation developed for EY Techathon 6.0, with core logic implemented in notebooks and workflow design validated through diagrams and demonstrations 
-
-692ab8680198f_EY_Techathon_6 (1)
-
-.
-
-Team
-
-Team Name: NEXSUS AI
-
-Aparimeya Tiwari – Database & Confidence Scoring (XGBoost)
-
-Harshalee Malu – Provider Ingestion & Directory Management
-
-Sahil Adit – Data Validation, Enrichment & Orchestration
-
-(Details from page 3) 
-
-692ab8680198f_EY_Techathon_6 (1)
-
-License
-
-License to be added.
+Developed for **EY Techathon 6.0**, wi
