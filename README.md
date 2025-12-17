@@ -12,6 +12,7 @@
 Insurance providers and third-party administrators (TPAs) depend on provider data for compliance, operations, and patient experience. However, manual and periodic verification methods fail to scale.  
 NEXSUS AI enables a **single, continuously validated source of truth** using confidence-based automation and human-in-the-loop governance.
 
+Video Demo: https://youtu.be/3Qp-TgRXheA?si=PRad0F4i0JifIEIu
 ---
 
 ## ❗ Problem Statement
